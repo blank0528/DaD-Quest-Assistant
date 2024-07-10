@@ -71,3 +71,9 @@ th {
 .empty-cell {
     visibility: hidden;
 }
+
+#exploreQuestTable th, #exploreQuestTable td {
+    white-space: nowrap;
+    padding: 4px;
+    text-align: left;
+}

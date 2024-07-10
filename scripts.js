@@ -224,7 +224,7 @@ function renderExploreQuestTable() {
 
         ['依頼主', 'クエスト', 'MAP', '種別', '階層', 'エリア', '座標(x,y)', '回数'].forEach(key => {
             const cell = document.createElement('td');
-            cell.textContent = quest[key];
+            cell.textContent = quest[key] === 'NaN' || quest[key] == null ? '' : quest[key];
             row.appendChild(cell);
         });
 
