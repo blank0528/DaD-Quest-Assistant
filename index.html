@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaD Quest Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <h1>DaD Quest Assistant</h1>
+    <button id="toggleCompletedButton" onclick="toggleCompleted()">完了済みのクエストを表示</button>
+    <br><br>
+    <h2>Questlist</h2>
+    <table id="questTable">
+        <thead>
+            <tr>
+                <th class="comp-column">comp</th>
+                <th class="quest-column" onclick="sortTable('questTable', 1)">client</th>
+                <th class="quest-column">Questlist</th>
+                <th class="quest-column">Item 1</th>
+                <th class="req-column">req 1</th>
+                <th class="quest-column">Item 2</th>
+                <th class="req-column">req 2</th>
+                <th class="quest-column">Item 3</th>
+                <th class="req-column">req 3</th>
+                <th class="quest-column">Item 4</th>
+                <th class="req-column">req 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- クエストデータはここに追加される -->
+        </tbody>
+    </table>
+    <br>
+    <h2>Itemlist</h2>
+    <table id="itemListTable" class="item-list-table">
+        <thead>
+            <tr>
+                <th onclick="sortTable('itemListTable', 0)">Item</th>
+                <th>req</th>
+                <th>poss</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 必要アイテムデータはここに追加される -->
+        </tbody>
+    </table>
+
+</body>
+</html>
