@@ -66,7 +66,11 @@ function renderQuestTable() {
         Object.keys(quest).forEach(key => {
             if (key !== 'comp') {
                 const cell = document.createElement('td');
-                cell.textContent = quest[key] === 'NaN' || quest[key] == null ? '' : quest[key];
+                if (quest[key] === 'NaN' || quest[key] == null || quest[key] === 0) {
+                    cell.textContent = '';
+                } else {
+                    cell.textContent = quest[key];
+                }
                 row.appendChild(cell);
             }
         });
@@ -82,6 +86,7 @@ function renderQuestTable() {
         questTableBody.appendChild(row);
     });
 }
+
 
 function updateItemList() {
     const itemList = {};
