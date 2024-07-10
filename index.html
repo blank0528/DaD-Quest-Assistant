@@ -48,14 +48,16 @@
     </table>
 
 <!-- トグルボタンを追加 -->
-<button id="toggleAcceptedButton" onclick="toggleAccepted()">受注済みのクエストを表示</button>
+<button id="toggleAcceptedButton" onclick="toggleAccepted()">受注済みのクエストのみを表示</button>
 <br><br>
 
 <!-- フィルターボタンを追加 -->
 <div id="filterButtons">
+    <button onclick="filterByMap('')">全て表示</button>
     <button onclick="filterByMap('雪山')">雪山</button>
     <button onclick="filterByMap('忘却の城')">忘却の城</button>
-    <!-- 必要に応じて他のMAPのボタンも追加 -->
+    <button onclick="filterByMap('ゴブリン洞窟')">ゴブリン洞窟</button>
+    <button onclick="filterByMap('インフェルノ')">インフェルノ</button>
 </div>
 <br><br>
 

@@ -183,7 +183,7 @@ let showAccepted = false;
 let mapFilter = '';
 
 function fetchExploreQuests() {
-    return fetch('explore_quests.json')
+    return fetch('explore_quests_clean.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -235,7 +235,7 @@ function renderExploreQuestTable() {
 function toggleAccepted() {
     showAccepted = !showAccepted;
     const toggleButton = document.getElementById('toggleAcceptedButton');
-    toggleButton.textContent = showAccepted ? '受注済みのクエストを非表示' : '受注済みのクエストを表示';
+    toggleButton.textContent = showAccepted ? '受注済みのクエストを非表示' : '受注済みのクエストのみを表示';
     renderExploreQuestTable();
 }
 
