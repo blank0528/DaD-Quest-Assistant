@@ -1,1 +1,1 @@
-# DaD-Quest-Assistant-2
+# DaD-Quest-Assistant
