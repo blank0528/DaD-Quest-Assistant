@@ -1,19 +1,27 @@
 let quests = [];
+let showCompleted = false;  // showCompleted 変数の定義
 
 function fetchQuests() {
     return fetch('quests.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             quests = data;
             renderQuestTable();
             updateItemList();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
         });
 }
 
 // クエストテーブルのレンダリングとアイテムリストの更新を初期化するためにfetchQuestsを呼び出します。
 fetchQuests();
 
-// 以下の関数はそのまま使用
 function renderQuestTable() {
     const questTableBody = document.querySelector('#questTable tbody');
     questTableBody.innerHTML = '';
