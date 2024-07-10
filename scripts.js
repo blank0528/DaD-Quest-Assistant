@@ -183,7 +183,7 @@ let showAccepted = false;
 let mapFilter = '';
 
 function fetchExploreQuests() {
-    return fetch('explore_quests_clean.json')
+    return fetch('explore_quests.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
