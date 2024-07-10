@@ -177,3 +177,80 @@ function getLocalStorage(key) {
 function setLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
+
+let exploreQuests = [];
+let showAccepted = false;
+let mapFilter = '';
+
+function fetchExploreQuests() {
+    return fetch('explore_quests.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            exploreQuests = data;
+            renderExploreQuestTable();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function renderExploreQuestTable() {
+    const exploreQuestTableBody = document.querySelector('#exploreQuestTable tbody');
+    exploreQuestTableBody.innerHTML = '';
+
+    exploreQuests.forEach((quest, index) => {
+        const isAccepted = getLocalStorage(`explore_quest_accepted_${index}`) !== null ? getLocalStorage(`explore_quest_accepted_${index}`) : quest['受注'];
+        if (showAccepted && !isAccepted) return;
+        if (mapFilter && quest['MAP'] !== mapFilter) return;
+
+        const row = document.createElement('tr');
+        row.dataset.index = index;
+
+        const acceptedCell = document.createElement('td');
+        const acceptedCheckbox = document.createElement('input');
+        acceptedCheckbox.type = 'checkbox';
+        acceptedCheckbox.checked = isAccepted;
+        acceptedCheckbox.addEventListener('change', () => {
+            setLocalStorage(`explore_quest_accepted_${index}`, acceptedCheckbox.checked);
+            renderExploreQuestTable();
+        });
+        acceptedCell.appendChild(acceptedCheckbox);
+        row.appendChild(acceptedCell);
+
+        ['依頼主', 'クエスト', 'MAP', '種別', '階層', 'エリア', '座標(x,y)', '回数'].forEach(key => {
+            const cell = document.createElement('td');
+            cell.textContent = quest[key];
+            row.appendChild(cell);
+        });
+
+        exploreQuestTableBody.appendChild(row);
+    });
+}
+
+function toggleAccepted() {
+    showAccepted = !showAccepted;
+    const toggleButton = document.getElementById('toggleAcceptedButton');
+    toggleButton.textContent = showAccepted ? '受注済みのクエストを非表示' : '受注済みのクエストを表示';
+    renderExploreQuestTable();
+}
+
+function filterByMap(map) {
+    mapFilter = map;
+    renderExploreQuestTable();
+}
+
+function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function setLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+// 初期化
+fetchExploreQuests();
