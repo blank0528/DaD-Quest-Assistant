@@ -1,5 +1,25 @@
+// タブの切り替え機能
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// デフォルトで最初のタブを開く
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.tablinks').click();
+});
+
 let quests = [];
-let showCompleted = false;  // showCompleted 変数の定義
+let showCompleted = false;
 
 function fetchQuests() {
     return fetch('quests.json')
@@ -46,11 +66,7 @@ function renderQuestTable() {
         Object.keys(quest).forEach(key => {
             if (key !== 'comp') {
                 const cell = document.createElement('td');
-                cell.textContent = quest[key];
-                if (quest[key] === 'NaN' || quest[key] === 0) {
-                    cell.textContent = '';
-                    cell.classList.add('empty-cell');
-                }
+                cell.textContent = quest[key] === 'NaN' || quest[key] == null ? '' : quest[key];
                 row.appendChild(cell);
             }
         });
@@ -153,29 +169,6 @@ function toggleCompleted() {
     const toggleButton = document.getElementById('toggleCompletedButton');
     toggleButton.textContent = showCompleted ? '完了済みのクエストを非表示' : '完了済みのクエストを表示';
     renderQuestTable();
-}
-
-function sortTable(tableId, colIndex) {
-    const table = document.getElementById(tableId);
-    const tbody = table.tBodies[0];
-    const rows = Array.from(tbody.rows);
-
-    rows.sort((a, b) => {
-        const aText = a.cells[colIndex].textContent.trim();
-        const bText = b.cells[colIndex].textContent.trim();
-
-        return aText.localeCompare(bText, 'ja');
-    });
-
-    rows.forEach(row => tbody.appendChild(row));
-}
-
-function getLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
-}
-
-function setLocalStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
 }
 
 let exploreQuests = [];

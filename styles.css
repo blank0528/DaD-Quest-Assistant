@@ -77,3 +77,45 @@ th {
     padding: 4px;
     text-align: left;
 }
+
+/* タブのスタイル */
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+/* テーブルのスタイル */
+#exploreQuestTable th, #exploreQuestTable td, #itemListTable th, #itemListTable td, #questTable th, #questTable td {
+    white-space: nowrap;
+    padding: 4px;
+    text-align: left;
+}
+
+#exploreQuestTable, #itemListTable, #questTable {
+    width: auto;
+    margin-left: 0;
+}
